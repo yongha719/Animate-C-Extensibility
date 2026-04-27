@@ -1,57 +1,102 @@
-# Animate Extensibility DLL
+# Animate C-Level Extensibility DLL
 
-이 프로젝트는 C++로 작성된 DLL을 통해 **Adobe Animate**에서 C-Level Extensibility 기능을 확장하는 예제입니다. Animate 내부에서 동작하는 **JSFL 스크립트**가 C/C++로 구현된 기능(예: 소켓 통신)을 직접 호출할 수 있도록 설계되었습니다.
+이 프로젝트는 Adobe Animate에서 로드할 수 있는 C-Level Extensibility DLL 예제입니다. DLL이 로드되면 Adobe Animate의 C-Level Extensibility API를 통해 JSFL에서 호출 가능한 네이티브 함수를 등록하고, 등록된 함수로 로컬 TCP 서버에 접속하거나 메시지를 주고받습니다.
+
+현재 구현은 Windows / Visual Studio 기준이며, 소켓 통신은 Winsock을 사용합니다.
 
 ## 주요 기능
 
-- **C/C++ 기반 DLL 구현**  
-  - `main.cpp`로부터 시작해 Animate에 노출할 내보내기 함수(예: `MM_Init()`)를 등록합니다.  
-  - `JSNative` 함수를 통해 Animate(JSFL)에서 `Animate_C_Extension.함수명()` 형태로 호출할 수 있습니다.
+- **Animate C-Level Extensibility 진입점**
+  - 실제 export 함수는 `jsapi.h`의 `MM_InitWrapper(MM_Environment* env, unsigned int envSize)`입니다.
+  - `MM_InitWrapper`가 Animate에서 전달한 환경 포인터를 `mmEnv`에 복사한 뒤, 사용자 정의 `MM_Init()`를 호출합니다.
+  - `MM_Init()`에서는 JSFL에서 호출할 수 있는 `JSNative` 함수들을 등록합니다.
 
-- **소켓 통신 기능**  
-  - 내부적으로 **Winsock**을 사용하여 TCP 소켓 통신을 수행합니다.  
-  - `SocketClient` 모듈에서 서버에 연결하고, 수신 받은 데이터를 `PacketProcessor`가 파싱해 저장/관리합니다.
-  - Node.js 측(`server.js`)에서 `net.createServer()`로 50313 포트에 대해 Listen을 수행하며, C++ DLL이 접속합니다.
+- **JSFL 호출 함수 등록**
+  - `startSocketClient()`: `127.0.0.1:50313`으로 TCP 접속을 시도합니다.
+  - `sendMessage(message)`: JSFL 문자열 인자를 UTF-8 문자열로 변환한 뒤 소켓으로 전송합니다.
+  - `getMessage(name)`: `PacketProcessor`에 저장된 메시지 중 `name` 키에 해당하는 값 목록을 JS 배열로 반환합니다.
 
-- **C/C++와 JSFL 간의 데이터 교환**  
-  - `JS_ValueToString`, `JS_StringToValue` 등의 C-Level Extensibility API로, JSFL 스크립트와 문자열을 주고받습니다.  
-  - 수신된 데이터는 `myUtil` 모듈을 통해 UTF-8 ↔ UTF-16 등으로 변환 처리될 수 있습니다.
+- **TCP 클라이언트**
+  - `SocketClient`는 싱글턴으로 구현되어 있습니다.
+  - `Connect(port)` 호출 시 `127.0.0.1`의 지정 포트로 접속합니다.
+  - 접속 후 별도 수신 스레드에서 `recv()`를 반복 호출하고, 받은 데이터를 `PacketProcessor`로 전달합니다.
+  - 수신 데이터 처리 후 `"Done"` 메시지를 서버로 다시 전송합니다.
 
-## 구성 요소
+- **간단한 메시지 파싱**
+  - `PacketProcessor`는 수신 문자열을 `name:value1,value2` 형식으로 가정합니다.
+  - `:` 앞부분을 키로 사용하고, `:` 뒤쪽 값을 `,` 기준으로 나누어 저장합니다.
+  - 같은 키로 데이터가 다시 들어오면 기존 목록 뒤에 값을 추가합니다.
 
-- **main.cpp**  
-  - Animate가 DLL을 로드하면, `MM_Init()`를 통해 JSNative 함수를 등록해 JSFL 스크립트와 연동합니다.  
+## 구성 파일
 
-- **SocketClient.h / SocketClient.cpp**  
-  - TCP 소켓 생성, 서버 연결/해제, 데이터 송수신을 담당합니다.  
-  - 별도의 쓰레드(`receiveLoop`)에서 서버의 메시지를 받아 `PacketProcessor`로 전달합니다.  
+- `Animate_C_Extension/main.cpp`
+  - JSFL에서 호출할 C++ 함수(`JS_startSocketClient`, `JS_sendMessage`, `JS_getMessage`)를 정의합니다.
+  - `MM_Init()`에서 `startSocketClient`, `sendMessage`, `getMessage`를 등록합니다.
+  - `EXE_TEST|x64` 구성에서 사용할 수 있는 콘솔 테스트용 `main()`도 포함되어 있습니다.
 
-- **PacketProcessor.h / PacketProcessor.cpp**  
-  - 소켓을 통해 들어온 문자열 데이터를 구분자(`:` 및 `,`)로 파싱하여 저장/관리합니다.  
-  - 필요한 경우 Animate 측(혹은 JSFL 측)으로 전달해 활용할 수 있게 합니다.  
+- `Animate_C_Extension/jsapi.h`
+  - Adobe Animate C-Level Extensibility API에 필요한 타입, 매크로, `MM_Environment`, `MM_InitWrapper`를 정의합니다.
 
-- **myUtil.h / myUtil.cpp**  
-  - `std::wstring` ↔ `std::string(UTF-8)` 등 문자열 변환을 담당하는 유틸 기능 모음입니다.  
+- `Animate_C_Extension/SocketClient.h`, `Animate_C_Extension/SocketClient.cpp`
+  - Winsock 초기화, TCP 연결/해제, 송신, 수신 스레드를 담당합니다.
 
-## 빌드 및 배포
+- `Animate_C_Extension/PacketProcessor.h`, `Animate_C_Extension/PacketProcessor.cpp`
+  - 수신된 문자열을 `:` 및 `,` 기준으로 파싱해 `unordered_map<string, vector<string>>`에 저장합니다.
 
-1. **빌드 환경**
-   - Visual Studio 2022 (C++20 이상)
-   - 64비트 DLL(Animate 2024는 64비트이므로)
+- `Animate_C_Extension/myUtil.h`, `Animate_C_Extension/myUtil.cpp`
+  - 문자열 split, `std::wstring` 포인터 변환, `std::wstring`에서 UTF-8 `std::string`으로 변환하는 유틸리티를 제공합니다.
 
-2. **DLL 배치 위치**
-   - 빌드된 DLL 파일을 아래 경로에 배치해야 Animate에서 인식됩니다:
-     ```
-     C:\Users\USER\AppData\Local\Adobe\Animate 2024\en_US\Configuration\External Libraries\
-     ```
-   - Animate 시작 시, 이 폴더의 DLL을 검색해 확장 기능을 자동으로 로드합니다.
+## 빌드 구성
 
-## 동작 방식
+프로젝트 파일에는 다음 구성이 포함되어 있습니다.
 
-1. Animate가 시작될 때, DLL을 읽어 `MM_Init()` 함수 등 내보낸(export) 함수를 확인합니다.  
-2. `MM_Init()`에서는 Animate(JSFL) 스크립트에서 호출할 수 있는 C++ 함수를 등록합니다.  
-3. JSFL 스크립트 내에서 예:
-   ```js
-   Animate_C_Extension.startSocketClient();
-   ``` 
-   와 같이 호출하면, DLL 내의 C++ 함수가 실행되고, 소켓 연결 등 네이티브 로직을 수행합니다.
+- `Debug|x64`, `Release|x64`
+  - `DynamicLibrary`로 빌드됩니다.
+  - Animate에서 로드할 DLL을 만들 때 사용하는 구성입니다.
+
+- `EXE_TEST|x64`
+  - `Application`으로 빌드됩니다.
+  - `main.cpp`의 콘솔 테스트용 `main()`을 실행할 수 있는 구성입니다.
+
+- `Win32` 구성
+  - 프로젝트 파일에는 남아 있지만, README 기준의 주 대상은 64비트 Animate에 맞춘 `x64` DLL입니다.
+
+## 배포 위치
+
+빌드된 DLL은 Animate의 External Libraries 폴더에 배치해야 합니다. 예:
+
+```text
+C:\Users\USER\AppData\Local\Adobe\Animate 2024\en_US\Configuration\External Libraries\
+```
+
+Animate가 DLL을 로드하면 export된 `MM_InitWrapper`를 통해 함수 등록이 수행됩니다.
+
+## JSFL 사용 예
+
+```js
+Animate_C_Extension.startSocketClient();
+Animate_C_Extension.sendMessage("hello");
+var messages = Animate_C_Extension.getMessage("Test");
+```
+
+위 예시의 `Animate_C_Extension` 객체명은 DLL이 Animate에 로드될 때 노출되는 라이브러리 이름에 의존합니다. 실제 호출 이름은 배치된 DLL 이름과 Animate의 로딩 방식에 맞춰 확인해야 합니다.
+
+## 통신 데이터 형식
+
+현재 `PacketProcessor`는 다음과 같은 단순 문자열 형식을 기대합니다.
+
+```text
+Test:ProjectA,ProjectB,ProjectC
+```
+
+이 데이터가 수신되면 `getMessage("Test")` 호출 시 `["ProjectA", "ProjectB", "ProjectC"]` 형태의 JS 배열을 반환하도록 구성되어 있습니다.
+
+## 현재 구현의 제약
+
+- 저장소에는 Node.js 서버 예제(`server.js`)가 포함되어 있지 않습니다. `startSocketClient()`를 테스트하려면 `127.0.0.1:50313`에서 TCP 서버를 별도로 실행해야 합니다.
+- 수신 파서는 TCP 스트림을 완전한 메시지 단위로 재조립하지 않습니다. 현재는 한 번의 `recv()` 호출에 완전한 `name:value1,value2` 문자열이 들어온다고 가정합니다.
+- `PacketProcessor::parse()`는 `:`가 없는 데이터에 대한 방어 처리가 없습니다.
+- `SocketClient::SendData()`는 전송 문자열에 `\n`을 추가하지만, 반환값 비교는 원본 문자열 길이와 비교하고 있어 성공 판정이 실제 전송 길이와 맞지 않습니다.
+- `getMessage()`의 문자열 반환은 일부 경로에서 단순 byte-to-wide 변환을 사용하므로, 비ASCII 수신 데이터는 깨질 수 있습니다.
+- `getMessage()`에는 테스트용 `JS_ReportError("TEST::테스트")` 호출이 남아 있어 정상 호출 중에도 에러 리포트를 발생시킬 수 있습니다.
+
