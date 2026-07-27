@@ -3,20 +3,8 @@
   "WorkspaceRootPath": "C:\\Users\\USER\\Documents\\Animate-C-Extensibility\\Animate_C_Extension\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{ACE417C5-6787-4D8F-821D-5C8FE0F9A8CF}|Animate_C_Extension.vcxproj|C:\\Users\\USER\\Documents\\Animate-C-Extensibility\\Animate_C_Extension\\main.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{ACE417C5-6787-4D8F-821D-5C8FE0F9A8CF}|Animate_C_Extension.vcxproj|solutionrelative:main.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{ACE417C5-6787-4D8F-821D-5C8FE0F9A8CF}|Animate_C_Extension.vcxproj|C:\\Users\\USER\\Documents\\Animate-C-Extensibility\\Animate_C_Extension\\SocketClient.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
       "RelativeMoniker": "D:0:0:{ACE417C5-6787-4D8F-821D-5C8FE0F9A8CF}|Animate_C_Extension.vcxproj|solutionrelative:SocketClient.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{ACE417C5-6787-4D8F-821D-5C8FE0F9A8CF}|Animate_C_Extension.vcxproj|C:\\Users\\USER\\Documents\\Animate-C-Extensibility\\Animate_C_Extension\\SocketClient.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{ACE417C5-6787-4D8F-821D-5C8FE0F9A8CF}|Animate_C_Extension.vcxproj|solutionrelative:SocketClient.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{ACE417C5-6787-4D8F-821D-5C8FE0F9A8CF}|Animate_C_Extension.vcxproj|C:\\Users\\USER\\Documents\\Animate-C-Extensibility\\Animate_C_Extension\\PacketProcessor.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{ACE417C5-6787-4D8F-821D-5C8FE0F9A8CF}|Animate_C_Extension.vcxproj|solutionrelative:PacketProcessor.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{ACE417C5-6787-4D8F-821D-5C8FE0F9A8CF}|Animate_C_Extension.vcxproj|C:\\Users\\USER\\Documents\\Animate-C-Extensibility\\Animate_C_Extension\\PacketProcessor.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
@@ -27,12 +15,20 @@
       "RelativeMoniker": "D:0:0:{ACE417C5-6787-4D8F-821D-5C8FE0F9A8CF}|Animate_C_Extension.vcxproj|solutionrelative:myUtil.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{ACE417C5-6787-4D8F-821D-5C8FE0F9A8CF}|Animate_C_Extension.vcxproj|C:\\Users\\USER\\Documents\\Animate-C-Extensibility\\Animate_C_Extension\\myUtil.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{ACE417C5-6787-4D8F-821D-5C8FE0F9A8CF}|Animate_C_Extension.vcxproj|solutionrelative:myUtil.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{ACE417C5-6787-4D8F-821D-5C8FE0F9A8CF}|Animate_C_Extension.vcxproj|C:\\Users\\USER\\Documents\\Animate-C-Extensibility\\Animate_C_Extension\\jsapi.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
       "RelativeMoniker": "D:0:0:{ACE417C5-6787-4D8F-821D-5C8FE0F9A8CF}|Animate_C_Extension.vcxproj|solutionrelative:jsapi.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{ACE417C5-6787-4D8F-821D-5C8FE0F9A8CF}|Animate_C_Extension.vcxproj|C:\\Users\\USER\\Documents\\Animate-C-Extensibility\\Animate_C_Extension\\PacketProcessor.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{ACE417C5-6787-4D8F-821D-5C8FE0F9A8CF}|Animate_C_Extension.vcxproj|solutionrelative:PacketProcessor.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{ACE417C5-6787-4D8F-821D-5C8FE0F9A8CF}|Animate_C_Extension.vcxproj|C:\\Users\\USER\\Documents\\Animate-C-Extensibility\\Animate_C_Extension\\main.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{ACE417C5-6787-4D8F-821D-5C8FE0F9A8CF}|Animate_C_Extension.vcxproj|solutionrelative:main.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{ACE417C5-6787-4D8F-821D-5C8FE0F9A8CF}|Animate_C_Extension.vcxproj|C:\\Users\\USER\\Documents\\Animate-C-Extensibility\\Animate_C_Extension\\myUtil.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{ACE417C5-6787-4D8F-821D-5C8FE0F9A8CF}|Animate_C_Extension.vcxproj|solutionrelative:myUtil.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     }
   ],
   "DocumentGroupContainers": [
@@ -41,18 +37,18 @@
       "VerticalTabListWidth": 256,
       "DocumentGroups": [
         {
-          "DockedWidth": 231,
-          "SelectedChildIndex": 0,
+          "DockedWidth": 179,
+          "SelectedChildIndex": 3,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 5,
               "Title": "main.cpp",
               "DocumentMoniker": "C:\\Users\\USER\\Documents\\Animate-C-Extensibility\\Animate_C_Extension\\main.cpp",
               "RelativeDocumentMoniker": "main.cpp",
               "ToolTip": "C:\\Users\\USER\\Documents\\Animate-C-Extensibility\\Animate_C_Extension\\main.cpp",
               "RelativeToolTip": "main.cpp",
-              "ViewState": "AQIAAB8AAAAAAAAAAAAswGgAAAAAAAAA",
+              "ViewState": "AQIAAHAAAAAAAAAAAAAswIYAAAABAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
               "WhenOpened": "2025-03-17T09:39:46.046Z",
               "IsPinned": true,
@@ -66,7 +62,7 @@
               "RelativeDocumentMoniker": "myUtil.h",
               "ToolTip": "C:\\Users\\USER\\Documents\\Animate-C-Extensibility\\Animate_C_Extension\\myUtil.h",
               "RelativeToolTip": "myUtil.h",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAoAAAAoAAAA",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAkAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
               "WhenOpened": "2025-03-25T01:53:05.021Z",
               "EditorCaption": ""
@@ -74,45 +70,32 @@
             {
               "$type": "Document",
               "DocumentIndex": 2,
-              "Title": "SocketClient.h",
-              "DocumentMoniker": "C:\\Users\\USER\\Documents\\Animate-C-Extensibility\\Animate_C_Extension\\SocketClient.h",
-              "RelativeDocumentMoniker": "SocketClient.h",
-              "ToolTip": "C:\\Users\\USER\\Documents\\Animate-C-Extensibility\\Animate_C_Extension\\SocketClient.h",
-              "RelativeToolTip": "SocketClient.h",
-              "ViewState": "AQIAAAkAAAAAAAAAAAAAABwAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2025-03-21T08:59:05.784Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
               "Title": "myUtil.cpp",
               "DocumentMoniker": "C:\\Users\\USER\\Documents\\Animate-C-Extensibility\\Animate_C_Extension\\myUtil.cpp",
               "RelativeDocumentMoniker": "myUtil.cpp",
               "ToolTip": "C:\\Users\\USER\\Documents\\Animate-C-Extensibility\\Animate_C_Extension\\myUtil.cpp",
               "RelativeToolTip": "myUtil.cpp",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAASAAAA",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABEAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
               "WhenOpened": "2025-03-25T02:49:41.485Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 1,
               "Title": "PacketProcessor.h",
               "DocumentMoniker": "C:\\Users\\USER\\Documents\\Animate-C-Extensibility\\Animate_C_Extension\\PacketProcessor.h",
               "RelativeDocumentMoniker": "PacketProcessor.h",
               "ToolTip": "C:\\Users\\USER\\Documents\\Animate-C-Extensibility\\Animate_C_Extension\\PacketProcessor.h",
               "RelativeToolTip": "PacketProcessor.h",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAABkAAAAAAAAA",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABIAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
               "WhenOpened": "2025-03-28T01:33:24.494Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 3,
               "Title": "jsapi.h",
               "DocumentMoniker": "C:\\Users\\USER\\Documents\\Animate-C-Extensibility\\Animate_C_Extension\\jsapi.h",
               "RelativeDocumentMoniker": "jsapi.h",
@@ -120,23 +103,24 @@
               "RelativeToolTip": "jsapi.h",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAA8AAAAYAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2025-03-13T09:41:00.105Z"
+              "WhenOpened": "2025-03-13T09:41:00.105Z",
+              "EditorCaption": ""
             }
           ]
         },
         {
-          "DockedWidth": 169,
+          "DockedWidth": 221,
           "SelectedChildIndex": 0,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 0,
               "Title": "SocketClient.cpp",
               "DocumentMoniker": "C:\\Users\\USER\\Documents\\Animate-C-Extensibility\\Animate_C_Extension\\SocketClient.cpp",
               "RelativeDocumentMoniker": "SocketClient.cpp",
               "ToolTip": "C:\\Users\\USER\\Documents\\Animate-C-Extensibility\\Animate_C_Extension\\SocketClient.cpp",
               "RelativeToolTip": "SocketClient.cpp",
-              "ViewState": "AQIAADsAAAAAAAAAAAAWwEIAAAAAAAAA",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABMAAAABAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
               "WhenOpened": "2025-03-13T08:47:37.357Z",
               "IsPinned": true,
@@ -144,13 +128,13 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 4,
               "Title": "PacketProcessor.cpp",
               "DocumentMoniker": "C:\\Users\\USER\\Documents\\Animate-C-Extensibility\\Animate_C_Extension\\PacketProcessor.cpp",
               "RelativeDocumentMoniker": "PacketProcessor.cpp",
               "ToolTip": "C:\\Users\\USER\\Documents\\Animate-C-Extensibility\\Animate_C_Extension\\PacketProcessor.cpp",
               "RelativeToolTip": "PacketProcessor.cpp",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAA8AAAAAAAAA",
+              "ViewState": "AQIAAA8AAAAAAAAAAAAAACMAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
               "WhenOpened": "2025-03-28T01:33:11.252Z",
               "EditorCaption": ""

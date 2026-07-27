@@ -15,15 +15,13 @@ void PacketProcessor::AppendData(const std::string& data) {
 }
 
 void PacketProcessor::parse() {
-    size_t pos = 0;
+    std::string line = buffer;
+    buffer.clear();
 
-    std::string line = buffer.c_str();
-    buffer.erase();
-
-    // ":"를 기준으로 키와 값을 분리
     std::vector<std::string_view> colonSplit = split(line, ':');
+    if (colonSplit.size() < 2) return;
 
-    std::string jsflName = std::string(colonSplit[0]);
+    const std::string jsflName(colonSplit[0]);
     std::string_view projectNames = colonSplit[1];
 
     if (!projectNames.empty()) {
@@ -31,23 +29,20 @@ void PacketProcessor::parse() {
             return std::string(sv);
             });
 
-        if (parsedData.find(jsflName) != parsedData.end()) {
-            parsedData[jsflName].insert(parsedData[jsflName].end(), view.begin(), view.end());
-        }
-        else {
-            std::vector<std::string> projectNameSplit(view.begin(), view.end());
-            parsedData.insert({ jsflName, projectNameSplit });
-        }
+        auto& entry = parsedData[jsflName];
+        entry.insert(entry.end(), view.begin(), view.end());
     }
 }
 
 const std::vector<std::string>& PacketProcessor::GetParsedDataByName(const std::wstring& wsv) {
-    std::string str;
-    str.assign(wsv.begin(), wsv.end());
-
-    return parsedData[str];
+    static const std::vector<std::string> empty;
+    std::string str(wsv.begin(), wsv.end());
+    auto it = parsedData.find(str);
+    return (it != parsedData.end()) ? it->second : empty;
 }
 
 const std::vector<std::string>& PacketProcessor::GetParsedDataByName(const std::string& sv) {
-    return parsedData[sv];
+    static const std::vector<std::string> empty;
+    auto it = parsedData.find(sv);
+    return (it != parsedData.end()) ? it->second : empty;
 }
